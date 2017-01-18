@@ -33,6 +33,11 @@ const Button = styled.button`
   &:focus {
     outline: none;
   }
+  
+  &:disabled {
+    color: black;
+    background-color: #247307;
+  }
 `;
 
 const PlusButton = styled(Button)`
@@ -49,30 +54,27 @@ const Output = styled.output`
   font-size: 32px;
 `;
 
-const Task_Break = ({taskTime, breakTime, taskModify, breakModify}) => {
+const Task_Break = ({taskTime, breakTime, taskModify, breakModify, ifRunning}) => {
 
   const subtractTask = () => (taskTime > 1) ? taskModify(-1) : taskModify(0);
-
   const addTask = () => (taskTime < 99) ? taskModify(1) : taskModify(0);
 
   const subtractBreak = () => (breakTime > 1) ? breakModify(-1) : breakModify(0);
-
   const addBreak = () => (breakTime < 99) ? breakModify(1) : breakModify(0);
-
 
   return(
     <Div>
         <P>Task</P>
       <Control>
-        <Button onClick={subtractTask}>-</Button>
+        <Button disabled={ifRunning} onClick={subtractTask}>-</Button>
         <Output>{taskTime}</Output>
-        <PlusButton onClick={addTask}>+</PlusButton>
+        <PlusButton disabled={ifRunning} onClick={addTask}>+</PlusButton>
       </Control>
         <P>Break</P>
       <Control>
-        <Button onClick={subtractBreak}>-</Button>
+        <Button disabled={ifRunning} onClick={subtractBreak}>-</Button>
         <Output>{breakTime}</Output>
-        <PlusButton onClick={addBreak}>+</PlusButton>
+        <PlusButton disabled={ifRunning} onClick={addBreak}>+</PlusButton>
       </Control>
     </Div>
   );

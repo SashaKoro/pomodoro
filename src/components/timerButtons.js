@@ -33,16 +33,15 @@ const Pause = styled(Start)`
   border-radius: 3px 3px 40px 3px;
 `;
 
-const TimerButtons = ({start, pause}) => {
+const TimerButtons = ({start, pause, ifRunning}) => {
 
   const startTimer = () => start();
-
   const pauseTimer = () => pause();
 
   return(
     <Div>
-      <Start onClick={startTimer}>Start</Start>
-      <Pause onClick={pauseTimer}>Pause</Pause>
+      <Start disabled={ifRunning} onClick={startTimer}>Start</Start>
+      <Pause disabled={!ifRunning} onClick={pauseTimer}>Pause</Pause>
     </Div>
   );
 };

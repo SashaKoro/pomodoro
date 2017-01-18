@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Display from './display';
 import TimerButtons from './timerButtons';
 import Task_Break from './task_break';
+import toastr from 'toastr';
 
 const Tomato = styled.div`
   background-color: #B70101;
@@ -16,7 +17,7 @@ const Tomato = styled.div`
 const Name = styled.div`
   color: black;
   margin: auto;
-  font-size: 40px;
+  font-size: 48px;
   text-align: center;
   font-family: "Brush Script MT", cursive, Arial;
 `;
@@ -41,10 +42,11 @@ class Pomodoro extends Component {
     super(props);
 
     this.state = {
-      time: '0:05',
+      tickTime: '0:01',
       taskTime: 25,
-      breakTime: 5,
-      breakCount: false
+      breakTime: 1,
+      isBreakNext: true,
+      startDisabled: false
     };
 
     this.Timer = this.Timer.bind(this);
@@ -56,16 +58,17 @@ class Pomodoro extends Component {
 
 
   startTheTimer(){
-    this.Loop = setInterval(this.Timer, 1000);
+    this.setState({ startDisabled: true });
+    this.LoopOfTime = setInterval(this.Timer, 1000);
   }
 
   pauseTheTimer(){
-    clearInterval(this.Loop);
+    this.setState({ startDisabled: false });
+    clearInterval(this.LoopOfTime);
   }
 
   Timer(){
-    let timeArray = this.state.time.split(':');
-    let [minutes, seconds] = timeArray;
+    let [minutes, seconds ] = this.state.tickTime.split(':');
     if (seconds !== '00') {
       seconds = (Number(seconds) - 1).toString();
       if (seconds.length === 1) seconds = `0${seconds}`;
@@ -73,14 +76,22 @@ class Pomodoro extends Component {
     else if (seconds === '00' && minutes !== '0') {
       minutes = (Number(minutes) - 1).toString();
       seconds = '59';
-    } else {
+    }
+    else if (this.state.isBreakNext) {
       this.playSound();
+      toastr.success('Break Time!');
       minutes = this.state.breakTime;
       seconds = '00';
+      this.setState({ isBreakNext: false });
     }
-
-    let formattedNewTime = `${minutes}:${seconds}`;
-    this.setState({ time: formattedNewTime});
+    else {
+      this.playSound();
+      toastr.success('Back to it!');
+      minutes = this.state.taskTime;
+      seconds = '00';
+      this.setState({ isBreakNext: true });
+    }
+    this.setState({ tickTime: `${minutes}:${seconds}`});
   }
 
   playSound(){
@@ -89,14 +100,15 @@ class Pomodoro extends Component {
   }
 
   changeTaskTime(value){
-    let newDualState = this.state.taskTime + value;
-    this.setState({ taskTime: newDualState });
-    let stringState = newDualState.toString() + ':00';
-    this.setState({ time: stringState })
+    let newTaskTime = this.state.taskTime + value;
+    this.setState({ taskTime: newTaskTime });
+    if (this.state.isBreakNext) this.setState({ tickTime: `${newTaskTime.toString()}:00` });
   }
 
   changeBreakTime(value){
-    this.setState({ breakTime: this.state.breakTime + value })
+    let newBreakTime = this.state.breakTime + value;
+    this.setState({ breakTime: newBreakTime });
+    if (!this.state.isBreakNext) this.setState({ tickTime: `${newBreakTime.toString()}:00` });
   }
 
   render(){
@@ -105,10 +117,11 @@ class Pomodoro extends Component {
         <Tomato>
           <Name>Pomodoro</Name>
           <Display
-            displayOutput={this.state.time} />
+            displayOutput={this.state.tickTime} />
           <TimerButtons
             start={this.startTheTimer}
             pause={this.pauseTheTimer}
+            ifRunning={this.state.startDisabled}
           />
         </Tomato>
         <Vine>
@@ -116,12 +129,13 @@ class Pomodoro extends Component {
             taskTime={this.state.taskTime}
             breakTime={this.state.breakTime}
             taskModify={this.changeTaskTime}
-            breakModify={this.changeBreakTime} />
+            breakModify={this.changeBreakTime}
+            ifRunning={this.state.startDisabled} />
         </Vine>
         <Ground/>
       </div>
     );
   }
-};
+}
 
 export default Pomodoro;
