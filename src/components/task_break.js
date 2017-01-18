@@ -5,6 +5,7 @@ const Div = styled.div`
 `;
 
 const P = styled.p`
+  color: black;
   font-size: 22px;
   text-align: center;
 `;
@@ -16,24 +17,31 @@ const Control = styled.div`
 
 const Button = styled.button`
   font-size: 30px;
-  text-align: center;
-  line-height: 20px;
-  margin-left: -30px;
-  height: 30px;
-  width: 30px;
-  background-color: #A5B922;
+  line-height: 10px;
+  margin-left: -35px;
+  height: 35px;
+  width: 35px;
+  background-color: #008E00;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  
+  &:hover {
+   background-color: #247307;
+   cursor: pointer;
+  }
+  
+  &:focus {
+    outline: none;
+  }
 `;
 
-const PlusButton = styled.button`
-  font-size: 30px;
-  line-height: 20px;
+const PlusButton = styled(Button)`
   margin-left: -20px;
-  height: 30px;
-  width: 30px;
-  background-color: #A5B922;
+  border-radius: 0 5px 5px 0;
 `;
 
 const Output = styled.output`
+  color: black;
   text-align: left;
   width: 70px;
   margin-right: 0px;
@@ -43,13 +51,13 @@ const Output = styled.output`
 
 const Task_Break = ({taskTime, breakTime, taskModify, breakModify}) => {
 
-  const subtractTask = () => taskModify(-1);
+  const subtractTask = () => (taskTime > 1) ? taskModify(-1) : taskModify(0);
 
-  const addTask = () => taskModify(1);
+  const addTask = () => (taskTime < 99) ? taskModify(1) : taskModify(0);
 
-  const subtractBreak = () => breakModify(-1);
+  const subtractBreak = () => (breakTime > 1) ? breakModify(-1) : breakModify(0);
 
-  const addBreak = () => breakModify(1);
+  const addBreak = () => (breakTime < 99) ? breakModify(1) : breakModify(0);
 
 
   return(

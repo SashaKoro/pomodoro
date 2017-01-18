@@ -14,10 +14,11 @@ const Tomato = styled.div`
 `;
 
 const Name = styled.div`
+  color: black;
   margin: auto;
   font-size: 40px;
   text-align: center;
-  font-family: "Brush Script MT", cursive;
+  font-family: "Brush Script MT", cursive, Arial;
 `;
 
 const Vine = styled.div`
@@ -32,7 +33,7 @@ const Ground = styled.div`
   height: 90px;
   width: 300px;
   background-color: #7F683A;
-  border-radius: 120px 120px 0px 0px;
+  border-radius: 120px 120px 5px 5px;
 `;
 
 class Pomodoro extends Component {
@@ -40,9 +41,10 @@ class Pomodoro extends Component {
     super(props);
 
     this.state = {
-      time: '25:00',
+      time: '0:05',
       taskTime: 25,
       breakTime: 5,
+      breakCount: false
     };
 
     this.Timer = this.Timer.bind(this);
@@ -62,7 +64,28 @@ class Pomodoro extends Component {
   }
 
   Timer(){
-    this.setState({ time: this.state.time - 1});
+    let timeArray = this.state.time.split(':');
+    let [minutes, seconds] = timeArray;
+    if (seconds !== '00') {
+      seconds = (Number(seconds) - 1).toString();
+      if (seconds.length === 1) seconds = `0${seconds}`;
+    }
+    else if (seconds === '00' && minutes !== '0') {
+      minutes = (Number(minutes) - 1).toString();
+      seconds = '59';
+    } else {
+      this.playSound();
+      minutes = this.state.breakTime;
+      seconds = '00';
+    }
+
+    let formattedNewTime = `${minutes}:${seconds}`;
+    this.setState({ time: formattedNewTime});
+  }
+
+  playSound(){
+    let sound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+    sound.play();
   }
 
   changeTaskTime(value){

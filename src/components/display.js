@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
+  color: black;
   background-color: #BD5417;
   width: 200px;
   height: 120px;

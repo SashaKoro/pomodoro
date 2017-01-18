@@ -7,15 +7,30 @@ const Div = styled.div`
 `;
 
 const Start = styled.button`
+  color: black;
+  font-size: 20px;
+  font-family: Monaco, Arial
   height: 50px;
   width: 90px;
   background-color: #CDB626;
-  border-radius: 0px 0px 0px 40px;
+  border-radius: 3px 3px 3px 40px;
   margin-right: 10px;
+  border: none;
+  
+  &:hover {
+    background-color: #B78701;
+    cursor: pointer;
+  }
+  
+  &:focus {
+    outline: none;
+    height: 54px;
+    width: 94px;
+  }
 `;
 
 const Pause = styled(Start)`
-  border-radius: 0px 0px 40px 0px;
+  border-radius: 3px 3px 40px 3px;
 `;
 
 const TimerButtons = ({start, pause}) => {
