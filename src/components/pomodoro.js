@@ -42,7 +42,7 @@ class Pomodoro extends Component {
     super(props);
 
     this.state = {
-      tickTime: '0:01',
+      tickTime: '25:00',
       taskTime: 25,
       breakTime: 1,
       isBreakNext: true,
@@ -113,7 +113,7 @@ class Pomodoro extends Component {
 
   render(){
     return(
-      <div>
+      <div className="Pomodoro">
         <Tomato>
           <Name>Pomodoro</Name>
           <Display

@@ -39,9 +39,9 @@ const TimerButtons = ({start, pause, ifRunning}) => {
   const pauseTimer = () => pause();
 
   return(
-    <Div>
-      <Start disabled={ifRunning} onClick={startTimer}>Start</Start>
-      <Pause disabled={!ifRunning} onClick={pauseTimer}>Pause</Pause>
+    <Div className="TimerButtons">
+      <Start className="start" disabled={ifRunning} onClick={startTimer}>Start</Start>
+      <Pause className="pause" disabled={!ifRunning} onClick={pauseTimer}>Pause</Pause>
     </Div>
   );
 };

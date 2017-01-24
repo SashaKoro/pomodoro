@@ -15,7 +15,7 @@ const Div = styled.div`
 
 const Display = ({displayOutput}) => {
   return(
-    <Div>{displayOutput}</Div>
+    <Div className="Display">{displayOutput}</Div>
   );
 };
 

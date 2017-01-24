@@ -4,7 +4,9 @@ import Pomodoro from './pomodoro';
 class App extends Component {
   render(){
     return(
-      <Pomodoro/>
+      <div className="app">
+        <Pomodoro/>
+      </div>
     );
   }
 }

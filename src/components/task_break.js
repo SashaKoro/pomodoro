@@ -63,18 +63,18 @@ const Task_Break = ({taskTime, breakTime, taskModify, breakModify, ifRunning}) =
   const addBreak = () => (breakTime < 99) ? breakModify(1) : breakModify(0);
 
   return(
-    <Div>
+    <Div className="Task_Break">
         <P>Task</P>
       <Control>
-        <Button disabled={ifRunning} onClick={subtractTask}>-</Button>
-        <Output>{taskTime}</Output>
-        <PlusButton disabled={ifRunning} onClick={addTask}>+</PlusButton>
+        <Button className="subtractTask" disabled={ifRunning} onClick={subtractTask}>-</Button>
+        <Output className="taskDisplay">{taskTime}</Output>
+        <PlusButton className="addTask" disabled={ifRunning} onClick={addTask}>+</PlusButton>
       </Control>
         <P>Break</P>
       <Control>
-        <Button disabled={ifRunning} onClick={subtractBreak}>-</Button>
-        <Output>{breakTime}</Output>
-        <PlusButton disabled={ifRunning} onClick={addBreak}>+</PlusButton>
+        <Button className="subtractBreak" disabled={ifRunning} onClick={subtractBreak}>-</Button>
+        <Output className="breakDisplay">{breakTime}</Output>
+        <PlusButton className="addBreak" disabled={ifRunning} onClick={addBreak}>+</PlusButton>
       </Control>
     </Div>
   );
