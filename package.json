@@ -4,10 +4,12 @@
   "description": "Pomodoro timer made with React",
   "repository": "",
   "scripts": {
-    "start": "npm-run-all --parallel open:src test:watch",
+    "start": "npm-run-all --parallel open:src test:watch lint:watch",
     "open:src": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "jest",
-    "test:watch": "npm run test --watch"
+    "test:watch": "npm run test --watch",
+    "lint": "node_modules/.bin/esw webpack.config.* src tools",
+    "lint:watch": "npm run lint -- --watch"
   },
   "author": "Sasha Korotkov",
   "license": "MIT",
@@ -26,7 +28,11 @@
     "toastr": "2.1.2",
     "enzyme": "^2.0.0",
     "jest": "15.1.1",
-    "jest-cli": "15.1.1"
+    "jest-cli": "15.1.1",
+    "eslint": "2.9.0",
+    "eslint-plugin-import": "1.6.1",
+    "eslint-plugin-react": "5.0.1",
+    "eslint-watch": "2.1.11"
   },
   "dependencies": {
     "axios": "^0.15.3",

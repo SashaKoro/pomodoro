@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -34,6 +34,12 @@ const Pause = styled(Start)`
 `;
 
 const TimerButtons = ({start, pause, ifRunning}) => {
+
+  TimerButtons.propTypes = {
+    start: PropTypes.func,
+    pause: PropTypes.func,
+    ifRunning: PropTypes.bool
+  };
 
   const startTimer = () => start();
   const pauseTimer = () => pause();

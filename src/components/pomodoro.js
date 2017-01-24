@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import Display from './display';
 import TimerButtons from './timerButtons';
-import Task_Break from './task_break';
+import TaskBreak from './task_break';
 import toastr from 'toastr';
 
 const Tomato = styled.div`
@@ -125,7 +125,7 @@ class Pomodoro extends Component {
           />
         </Tomato>
         <Vine>
-          <Task_Break
+          <TaskBreak
             taskTime={this.state.taskTime}
             breakTime={this.state.breakTime}
             taskModify={this.changeTaskTime}

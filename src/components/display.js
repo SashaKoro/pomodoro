@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -14,6 +14,11 @@ const Div = styled.div`
 `;
 
 const Display = ({displayOutput}) => {
+
+  Display.propTypes = {
+    displayOutput: PropTypes.string
+  };
+
   return(
     <Div className="Display">{displayOutput}</Div>
   );

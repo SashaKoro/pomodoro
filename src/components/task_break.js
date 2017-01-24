@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -55,6 +55,14 @@ const Output = styled.output`
 `;
 
 const Task_Break = ({taskTime, breakTime, taskModify, breakModify, ifRunning}) => {
+
+  Task_Break.propTypes = {
+    taskTime: PropTypes.number,
+    breakTime: PropTypes.number,
+    taskModify: PropTypes.func,
+    breakModify: PropTypes.func,
+    ifRunning: PropTypes.bool
+  };
 
   const subtractTask = () => (taskTime > 1) ? taskModify(-1) : taskModify(0);
   const addTask = () => (taskTime < 99) ? taskModify(1) : taskModify(0);
