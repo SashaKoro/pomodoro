@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component, } from 'react';
 import Pomodoro from './pomodoro';
 
 class App extends Component {
-  render(){
-    return(
+  render () {
+    return (
       <div className="app">
-        <Pomodoro/>
+        <Pomodoro />
       </div>
     );
   }

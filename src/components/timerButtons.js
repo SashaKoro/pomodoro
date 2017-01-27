@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, } from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -16,12 +16,12 @@ const Start = styled.button`
   border-radius: 3px 3px 3px 40px;
   margin-right: 10px;
   border: none;
-  
+
   &:hover {
     background-color: #B78701;
     cursor: pointer;
   }
-  
+
   &:focus {
     outline: none;
     height: 54px;
@@ -33,18 +33,17 @@ const Pause = styled(Start)`
   border-radius: 3px 3px 40px 3px;
 `;
 
-const TimerButtons = ({start, pause, ifRunning}) => {
-
+const TimerButtons = ({ start, pause, ifRunning, }) => {
   TimerButtons.propTypes = {
     start: PropTypes.func,
     pause: PropTypes.func,
-    ifRunning: PropTypes.bool
+    ifRunning: PropTypes.bool,
   };
 
   const startTimer = () => start();
   const pauseTimer = () => pause();
 
-  return(
+  return (
     <Div className="TimerButtons">
       <Start className="start" disabled={ifRunning} onClick={startTimer}>Start</Start>
       <Pause className="pause" disabled={!ifRunning} onClick={pauseTimer}>Pause</Pause>

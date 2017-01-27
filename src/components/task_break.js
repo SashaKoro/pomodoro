@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, } from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -24,16 +24,16 @@ const Button = styled.button`
   background-color: #008E00;
   border: none;
   border-radius: 5px 0 0 5px;
-  
+
   &:hover {
    background-color: #247307;
    cursor: pointer;
   }
-  
+
   &:focus {
     outline: none;
   }
-  
+
   &:disabled {
     color: black;
     background-color: #247307;
@@ -54,14 +54,13 @@ const Output = styled.output`
   font-size: 32px;
 `;
 
-const Task_Break = ({taskTime, breakTime, taskModify, breakModify, ifRunning}) => {
-
+const Task_Break = ({ taskTime, breakTime, taskModify, breakModify, ifRunning, }) => {
   Task_Break.propTypes = {
     taskTime: PropTypes.number,
     breakTime: PropTypes.number,
     taskModify: PropTypes.func,
     breakModify: PropTypes.func,
-    ifRunning: PropTypes.bool
+    ifRunning: PropTypes.bool,
   };
 
   const subtractTask = () => (taskTime > 1) ? taskModify(-1) : taskModify(0);
@@ -70,11 +69,11 @@ const Task_Break = ({taskTime, breakTime, taskModify, breakModify, ifRunning}) =
   const subtractBreak = () => (breakTime > 1) ? breakModify(-1) : breakModify(0);
   const addBreak = () => (breakTime < 99) ? breakModify(1) : breakModify(0);
 
-  return(
+  return (
     <Div className="Task_Break">
         <P>Task</P>
       <Control>
-        <Button className="subtractTask" disabled={ifRunning} onClick={subtractTask}>-</Button>
+          <Button className="subtractTask" disabled={ifRunning} onClick={subtractTask}>-</Button>
         <Output className="taskDisplay">{taskTime}</Output>
         <PlusButton className="addTask" disabled={ifRunning} onClick={addTask}>+</PlusButton>
       </Control>
